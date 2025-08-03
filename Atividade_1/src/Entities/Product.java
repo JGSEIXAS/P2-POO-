@@ -17,7 +17,7 @@ public class Product {
     public void AddProducts(Integer quantity){
         this.quantity += quantity;
     }
-    public void RemoveProducts(Integer Quantity){
+    public void RemoveProducts(Integer quantity){
         this.quantity -= quantity;
     }
     @Override
