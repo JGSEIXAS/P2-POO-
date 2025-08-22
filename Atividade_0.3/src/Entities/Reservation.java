@@ -50,23 +50,15 @@ public class Reservation{
         return (int) ChronoUnit.DAYS.between(this.checkIn,this.checkOut);
     }
 
-    public void UpdateDate(LocalDate checkIn, LocalDate checkOut){
-    LocalDate today = LocalDate.now();
-
-    if (!checkOut.isAfter(checkIn)) {
-        throw new DomainException("Check-out deve ser depois do Check-in");
-    }
-    if (checkIn == null || checkOut == null) {
-        throw new DomainException("Check-in e check-out precisam ser dados");
-    }
-    
-    if (!checkIn.isAfter(today) || !checkOut.isAfter(today)) {
-        throw new DomainException("A data precisa ser depois de hoje");
-    }
-
-
-    this.checkIn = checkIn;
-    this.checkOut = checkOut;
+    public void updateDates(LocalDate checkIn, LocalDate checkOut) {
+        if (!checkOut.isAfter(checkIn)) {
+            throw new DomainException("Check-out precisa ser depois de Check-In");
+        }
+        if (checkIn.isBefore(this.checkIn) || checkOut.isBefore(this.checkOut)) {
+            throw new DomainException("Erro: Dia da reserva precisa ser a partir de amanhã");
+        }
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
     }
 
     @Override
